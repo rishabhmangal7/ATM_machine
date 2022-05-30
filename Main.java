@@ -25,7 +25,7 @@ public class Main {
 			do {
 				System.out.println("Select The Operation You Want To Access:");
 				System.out.print(
-						" Type 1: View All Information\n Type 2: Deposite Funds \n Type 3: Withdraw Funds \n Type 4: Check Bank Balence \n Type 5: Change Pin  \n Type 6: Exit \n Choice: ");
+						" Type 1: View All Information\n Type 2: Deposite Funds \n Type 3: Withdraw Funds \n Type 4: Check Bank balance \n Type 5: Change Pin  \n Type 6: Exit \n Choice: ");
 				choice = sc.nextInt();
 				System.out.println("\n");
 				obj.operation(object.acc_no, choice);

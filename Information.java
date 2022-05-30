@@ -36,29 +36,31 @@ public class Information extends Operation {
 	public void operation(long acc_no, int choice) throws Exception {
 		String account_type = "";
 		int pin = 0;
-		float balence = 0;
+		float balance = 0;
 
 		Class.forName(Driver);
 		Connection con = DriverManager.getConnection(URL, UserName, password);
 		Statement st = con.createStatement();
-		ResultSet rs = st.executeQuery("SELECT * FROM machine WHERE Account_Number=(" + acc_no + ") ");
+		ResultSet rs = st
+				.executeQuery("SELECT Account_type,Account_Number,Password,balance FROM machine WHERE Account_Number=("
+						+ acc_no + ") ");
 		if (rs.next()) {
 			account_type = rs.getString(1);
 			pin = rs.getInt(3);
-			balence = rs.getFloat(4);
+			balance = rs.getFloat(4);
 		}
 		switch (choice) {
 		case 1:
 			information(rs);
 			break;
 		case 2:
-			deposite(rs, st, balence, acc_no);
+			deposite(rs, st, balance, acc_no);
 			break;
 		case 3:
-			withdraw(balence, st, acc_no, rs, pin);
+			withdraw(balance, st, acc_no, rs, pin);
 			break;
 		case 4:
-			checkBalence(pin, balence);
+			checkbalance(pin, balance);
 			break;
 		case 5:
 			changePin(pin, st, acc_no);

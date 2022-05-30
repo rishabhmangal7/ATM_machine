@@ -9,52 +9,52 @@ public class Operation {
 
 	public static void information(ResultSet rs) throws Exception {
 		System.out.println("Account type : " + rs.getString(1) + "\n" + "Account Number: " + rs.getLong(2) + "\n"
-				+ "Password: " + rs.getInt(3) + "\n" + "Balence: " + rs.getFloat(4) + "INR." + "\n\n");
+				+ "Password: " + rs.getInt(3) + "\n" + "balance: " + rs.getFloat(4) + "INR." + "\n\n");
 	}
 
-	public static void deposite(ResultSet rs, Statement st, float balence, long acc_no) {
+	public static void deposite(ResultSet rs, Statement st, float balance, long acc_no) {
 		try {
 			System.out.print("Enter Amount You Want To Deposite : ");
 			float amount = sc.nextFloat();
 			if (amount < 0) {
-				System.out.println("\n Wrong Amount Enter !!!!!!!!!!\n\n");
+				System.out.println("\n Amount can't be negative !!!!!!!!!!\n\n");
 			} else {
-				float new_amount = balence + amount;
+				float new_amount = balance + amount;
 				int count = st.executeUpdate(
-						"UPDATE machine SET balence=" + new_amount + " WHERE Account_Number=" + acc_no + "");
-				rs = st.executeQuery("SELECT balence FROM machine WHERE Account_Number=(" + acc_no + ") ");
+						"UPDATE machine SET balance=" + new_amount + " WHERE Account_Number=" + acc_no + "");
+				rs = st.executeQuery("SELECT balance FROM machine WHERE Account_Number=(" + acc_no + ") ");
 				if (rs.next()) {
-					balence = rs.getFloat(1);
+					balance = rs.getFloat(1);
 				}
 				System.out.println("\n You Have SuccessFully Credited " + amount + " INR." + "\n"
-						+ "Your New Updated Balence is :" + balence + " INR." + "\n\n");
+						+ "Your New Updated balance is :" + balance + " INR." + "\n\n");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static void withdraw(float balence, Statement st, long acc_no, ResultSet rs, int pin) throws Exception {
+	public static void withdraw(float balance, Statement st, long acc_no, ResultSet rs, int pin) throws Exception {
 		System.out.print("Enter Your Account pin : ");
 		int p = sc.nextInt();
 		if (p == pin) {
 			System.out.print("Enter Amount You Want To Withdraw : ");
 			float w_amount = sc.nextFloat();
 			if (w_amount < 0) {
-				System.out.println("\n Wrong Amount Enter !!\n Please Enter Correct Amount\n\n");
+				System.out.println("\n Amount can't be negative !!\n Please Enter Correct Amount\n\n");
 			} else {
-				float Update_amount = balence - w_amount;
+				float Update_amount = balance - w_amount;
 				if (Update_amount < 0) {
-					System.out.println("\n You Have Insufficient Balence !!!\n\n");
+					System.out.println("\n You Have Insufficient balance !!!\n\n");
 				} else {
 					int count1 = st.executeUpdate(
-							"UPDATE machine SET balence=" + Update_amount + " WHERE Account_Number=" + acc_no + "");
-					rs = st.executeQuery("SELECT balence FROM machine WHERE Account_Number=(" + acc_no + ") ");
+							"UPDATE machine SET balance=" + Update_amount + " WHERE Account_Number=" + acc_no + "");
+					rs = st.executeQuery("SELECT balance FROM machine WHERE Account_Number=(" + acc_no + ") ");
 					if (rs.next()) {
-						balence = rs.getFloat(1);
+						balance = rs.getFloat(1);
 					}
 					System.out.println("\n You Have SuccessFully Debited " + w_amount + " INR." + "\n"
-							+ "Now Avilable Balence is :" + balence + " INR." + "\n\n");
+							+ "Now Avilable balance is :" + balance + " INR." + "\n\n");
 				}
 			}
 		} else {
@@ -63,11 +63,11 @@ public class Operation {
 
 	}
 
-	public static void checkBalence(int pin, float balence) {
+	public static void checkbalance(int pin, float balance) {
 		System.out.print("Enter Your Account Pin : ");
 		int u_pin = sc.nextInt();
 		if (u_pin == pin) {
-			System.out.println("\n Your Account Balence is : " + balence + " INR." + "\n\n");
+			System.out.println("\n Your Account balance is : " + balance + " INR." + "\n\n");
 		} else {
 			System.out.println("\n Incorrect Pin!! \n\n");
 		}
