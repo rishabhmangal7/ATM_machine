@@ -23,11 +23,11 @@ public class Information extends Operation {
 				System.out.println("\n Congratulations for successfully login !!\n\n");
 				flag = true;
 			} else {
-				System.out.println("Wrong Password !!!!!!");
+				System.out.println("Incorrect Password !!!!!!");
 			}
 
 		} else {
-			System.out.println("Wrong Account Number !!!!!");
+			System.out.println("Incorrect Account Number !!!!!");
 		}
 
 		return flag;
